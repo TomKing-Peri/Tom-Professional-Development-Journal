@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professional Development Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --border: #e4e0d8;
+      --text-primary: #1a1916;
+      --text-secondary: #6b6760;
+      --accent: #2d4a3e;
+      --accent-light: #e8f0ec;
+      --tag-bg: #f0ede8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 0 2rem;
+      background: var(--surface);
+    }
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    header p {
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      font-weight: 300;
+    }
+    .header-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+    }
+    .meta-chip {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.25rem 0.7rem;
+      border-radius: 2px;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── MONTH SECTION ── */
+    .month-section {
+      margin-bottom: 3.5rem;
+    }
+    .month-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--text-primary);
+    }
+    .month-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .month-year {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+    .entry-count {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* ── ENTRY CARD ── */
+    .entry-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .entry-card:hover {
+      border-color: #c8c4bc;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .entry-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    /* Three-column grid for task / objective / outcome */
+    .entry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) {
+      .entry-grid { grid-template-columns: 1fr; }
+    }
+
+    .entry-field label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+    .entry-field p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.55;
+    }
+
+    .entry-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+    .entry-date {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    .entry-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      background: var(--tag-bg);
+      color: var(--text-secondary);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-month {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      padding: 1.5rem 1.75rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>Professional Development Journal</h1>
+    <p>A record of projects, tasks, and growth over time.</p>
+    <div class="header-meta">
+      <span class="meta-chip">Cyber Security</span>
+      <span class="meta-chip">ISO 27001:2022</span>
+      <span class="meta-chip">2026</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HOW TO ADD A NEW MONTH:
+       Copy the block between "START MONTH" and "END MONTH",
+       paste it below, and update the month name, year, and entries.
+  ============================================================= -->
+
+
+  <!-- ===================== START MONTH ===================== -->
+  <section class="month-section">
+
+    <div class="month-header">
+      <h2 class="month-title">February</h2>
+      <span class="month-year">2026</span>
+      <span class="entry-count">0 entries</span>
+    </div>
+
+    <!-- Empty state — remove this and add an entry card when you have entries -->
+    <div class="empty-month">No entries yet for this month.</div>
+
+  </section>
+  <!-- ====================== END MONTH ====================== -->
+
+
+  <!-- ===================== START MONTH ===================== -->
+  <section class="month-section">
+
+    <div class="month-header">
+      <h2 class="month-title">March</h2>
+      <span class="month-year">2026</span>
+      <span class="entry-count">0 entries</span>
+    </div>
+
+    <!-- Empty state — remove this and add an entry card when you have entries -->
+    <div class="empty-month">No entries yet for this month.</div>
+
+  </section>
+  <!-- ====================== END MONTH ====================== -->
+
+
+</main>
+
+<footer>
+  Personal Development Journal &mdash; for internal use only
+</footer>
+
+</body>
+</html>
